@@ -16,7 +16,7 @@ public class SignUpServlet extends HttpServlet {
 		String id = req.getParameter("id"); 
 		String name = req.getParameter("name"); 
 		String password = req.getParameter("password"); 
-		boolean success = false;
+		boolean success = true;
 		
 		PersistenceManager pm = MyPersistenceManager.getManager();
 		Query qry = pm.newQuery(UserAccount.class);
@@ -28,6 +28,7 @@ public class SignUpServlet extends HttpServlet {
 			if(tm.getUserId().equals(id)) {
 
 				success = false;
+				break;
 
 			} else {
 				

@@ -21,41 +21,54 @@ public class EntryServlet extends HttpServlet{
 		boolean noToken = true;
 		String uuid = UUID.randomUUID().toString();
 		
-		Cookie[] cookieList = req.getCookies();
+		Cookie[] cookieList; //= req.getCookies();
 		
-		if(cookieList.length == 0) {
+		/*if(cookieList.length == 0) {
 			resp.getWriter().println(cookieList.length);
-		}
+		}*/
 		
-		for(Cookie c : cookieList) {
-			if(c.getName().equals("token")) {
-				
-				PersistenceManager pm = MyPersistenceManager.getManager();
-				Query qry = pm.newQuery(UserLoginToken.class);
-				@SuppressWarnings("unchecked")
-				List<UserLoginToken> userList = (List<UserLoginToken>) qry.execute();
-				
-				
-				for(UserLoginToken tm : userList) {
-					if(tm.getToken().equals(c.getValue())) {
-						id = tm.getUserAccount();
+		if(req.getCookies() == null)
+		{
+			resp.sendRedirect("login.html");
+		}
+		else
+		{
+			cookieList = req.getCookies();
+			
+			for(Cookie c : cookieList) {
+				if(c.getName().equals("token")) {
 					
-						Date now = new Date();
-						if(now.toString().compareTo(tm.getExpireDate()) < 0)
-						{
-							noToken = false;
+					PersistenceManager pm = MyPersistenceManager.getManager();
+					Query qry = pm.newQuery(UserLoginToken.class);
+					@SuppressWarnings("unchecked")
+					List<UserLoginToken> userList = (List<UserLoginToken>) qry.execute();
+					
+					
+					for(UserLoginToken tm : userList) {
+						if(tm.getToken().equals(c.getValue())) {
+							id = tm.getUserAccount();
+						
+							Date now = new Date();
+							//Date expired = new Date(tm.getExpireDate());
 							
-							c.setValue(uuid);
-							tm.setToken(uuid);
-							
-							HttpSession session = req.getSession();
-							session.setAttribute("id", id);
-						}
+							if(now.toString().compareTo(tm.getExpireDate()) >= 0)
+							{
+								noToken = false;
+								
+								c.setValue(uuid);
+								tm.setToken(uuid);
+								
+								HttpSession session = req.getSession();
+								session.setAttribute("id", id);
+							}
 
+						}
 					}
 				}
 			}
 		}
+		
+		
 		
 		if(noToken) {
 			resp.sendRedirect("login.html");
