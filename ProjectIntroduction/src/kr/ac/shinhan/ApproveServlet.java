@@ -1,14 +1,13 @@
 package kr.ac.shinhan;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@SuppressWarnings("serial")
 public class ApproveServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
@@ -32,7 +31,10 @@ public class ApproveServlet extends HttpServlet {
 		object.setPhoneNumber(phoneNumber);
 		object.setEmail(email);
 		object.setKakaoId(kakaoId);
-		object.setTeamLeader(teamLeader);
+		if(teamLeader != null) 
+			object.setTeamLeader("true");
+		else 
+			object.setTeamLeader("false");
 		object.setHubId(hubId);
 		
 		//pm.close();

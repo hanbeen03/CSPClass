@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>ProjectIntroduction</servlet-name>
+		<servlet-class>kr.ac.shinhan.ProjectIntroductionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProjectIntroduction</servlet-name>
+		<url-pattern>/projectintroduction</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RetrieveMember</servlet-name>
+		<servlet-class>kr.ac.shinhan.RetrieveMemberServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RetrieveMember</servlet-name>
+		<url-pattern>/retrievemember</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ChangeServlet</servlet-name>
+		<servlet-class>kr.ac.shinhan.ChangeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangeServlet</servlet-name>
+		<url-pattern>/changeservlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RemoveServlet</servlet-name>
+		<servlet-class>kr.ac.shinhan.RemoveServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RemoveServlet</servlet-name>
+		<url-pattern>/removeservlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ApproveServlet</servlet-name>
+		<servlet-class>kr.ac.shinhan.ApproveServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ApproveServlet</servlet-name>
+		<url-pattern>/approveservlet</url-pattern>
+	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+		
+</web-app>

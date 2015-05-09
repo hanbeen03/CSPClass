@@ -8,6 +8,7 @@ import javax.jdo.Query;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @SuppressWarnings("serial")
 public class RetrieveMemberServlet extends HttpServlet {
@@ -17,10 +18,12 @@ public class RetrieveMemberServlet extends HttpServlet {
 			
 		String url = "/changeservlet";
 		String url_2 = "/removeservlet";
+		String id;
 			
 		PersistenceManager pm = MyPersistenceManager.getManager();
 		Query  qry = pm.newQuery(TeamMember.class);
 		//@SuppressWarnings("unchecked")
+		@SuppressWarnings("unchecked")
 		List<TeamMember> memberList = (List<TeamMember>) qry.execute();
 		
 		resp.setContentType("text/plain");
@@ -30,6 +33,16 @@ public class RetrieveMemberServlet extends HttpServlet {
 		resp.getWriter().println("<body>");
 		//resp.getWriter().println("aaaaa");
 		resp.getWriter().println("<table border ='1'>");
+		
+		HttpSession session = req.getSession(false);
+		
+		if(session == null) {
+			resp.getWriter().println("No session Available ...");
+		} else {
+			id = (String) session.getAttribute("id");
+			
+			resp.getWriter().println(id + "님 환영합니다.");
+		}
 		
 		for(TeamMember tm : memberList)
 		{

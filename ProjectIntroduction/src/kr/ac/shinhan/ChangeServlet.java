@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 //@SuppressWarnings("serial")
+@SuppressWarnings("serial")
 public class ChangeServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
@@ -25,7 +26,7 @@ public class ChangeServlet extends HttpServlet {
 		String checkbox = "checkbox";
 		String teamLeader = "teamLeader";
 		String hubId = "hubId";
-		String submit = "submit";
+		//String submit = "submit";
 		String first = "index.html"; 
 		
 		
@@ -36,6 +37,7 @@ public class ChangeServlet extends HttpServlet {
 		qry.setFilter("name == nameParam");
 		qry.declareParameters("String nameParam");
 		//@SuppressWarnings("unchecked")
+		@SuppressWarnings("unchecked")
 		List<TeamMember> memberList =  (List<TeamMember>) qry.execute(name);
 		
 		//resp.getWriter().println(name);
@@ -48,7 +50,7 @@ public class ChangeServlet extends HttpServlet {
 		
 		//resp.getWriter().println(teamLeader);
 		resp.getWriter().println("<table border ='1'>");
-		resp.getWriter().println("<form method='get' action='/approveservlet'>");
+		resp.getWriter().println("<form method='get' action='/approveservlet?key=" + m.getKey() + "'>");
 		
 		
 		resp.getWriter().println("<tr>");
@@ -76,7 +78,7 @@ public class ChangeServlet extends HttpServlet {
 		
 		
 		resp.getWriter().println("<tr>");
-		resp.getWriter().println("<td>" + "<a href='/approveservlet?key=" + m.getKey() + "'>" + "수정/변경" + "</a>"  + "</td>");
+		resp.getWriter().println("<td>" + "<input type='submit' value='update'>"  + "</td>");
 		resp.getWriter().println("</tr>");
 		
 		resp.getWriter().println("<tr>");
