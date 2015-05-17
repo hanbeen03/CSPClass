@@ -10,13 +10,13 @@ import javax.jdo.annotations.PrimaryKey;
 public class UserLoginToken {
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Long key;
+	private Long key;  //프라이머리
 	
 	@Persistent
 	private String token;
 	
 	@Persistent
-	private String userAccount;
+	private String userAccount;  //아이디
 	
 	@Persistent
 	private String expireDate;
@@ -32,10 +32,10 @@ public class UserLoginToken {
 		return key;
 	}
 
-	public void setKey(Long key) {
+	/*public void setKey(Long key) {
 		this.key = key;
-	}
-
+	}*/
+	
 	public String getToken() {
 		return token;
 	}
@@ -48,9 +48,9 @@ public class UserLoginToken {
 		return userAccount;
 	}
 
-	public void setUserAccount(String userAccount) {
+	/*public void setUserAccount(String userAccount) {
 		this.userAccount = userAccount;
-	}
+	}*/
 
 	public String getExpireDate() {
 		return expireDate;

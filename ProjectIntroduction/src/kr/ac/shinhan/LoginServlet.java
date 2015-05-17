@@ -1,6 +1,7 @@
 package kr.ac.shinhan;
 
 import java.io.IOException;
+import java.util.Calendar;
 //import java.util.Calendar;
 import java.util.Date;
 //import java.util.GregorianCalendar;
@@ -60,6 +61,25 @@ public class LoginServlet extends HttpServlet{
 		}
 		if(success)
 		{
+			/*if(req.getParameter("remember") != null) {
+				//작업시작
+				String token = UUID.randomUUID().toString();
+				
+				Cookie cookie = new Cookie("login_token", token);
+				cookie.setMaxAge(60*60*24*30);
+				resp.addCookie(cookie);
+				
+				//DB 저장
+				
+				Calendar now = Calendar.getInstance();
+				now.add(Calendar.DATE, 30);
+				String expireDate = now.getTime().toString();
+				
+				UserLoginToken ult = new UserLoginToken(token, id, expireDate);
+				MyPersistenceManager.getManager().makePersistent(ult);
+				
+			}*/
+			
 			HttpSession session = req.getSession();
 			session.setAttribute("id", id);
 			
